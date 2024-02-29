@@ -13,4 +13,4 @@ project (${PROJECT_NAME})
 
 
 # Включите подпроекты.
-add_subdirectory ("src")
+add_subdirectory ("Engine")

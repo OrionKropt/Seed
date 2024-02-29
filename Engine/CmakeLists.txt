@@ -1,0 +1,101 @@
+
+
+file (GLOB_RECURSE _SOURCES CONFIGURE_DEPENDS "src/*.cpp")
+file (GLOB_RECURSE _HEADERS CONFIGURE_DEPENDS "src/*.h")
+
+set (_INCLUDE_DIRS "")
+
+foreach (_headerFile ${_HEADERS})
+    get_filename_component(_dir ${_headerFile} PATH)
+    list (APPEND _INCLUDE_DIRS ${_dir})
+endforeach()
+
+list (REMOVE_DUPLICATES _INCLUDE_DIRS)
+
+add_executable(${PROJECT_NAME} ${_SOURCES} "${_HEADERS}")
+
+target_include_directories(${PROJECT_NAME} PRIVATE ${_INCLUDE_DIRS})
+
+
+
+#add_executable (${PROJECT_NAME}
+           # "src/main.cpp"
+           # "src/main.h"
+          
+           # "src/generate_id.cpp"
+           # "src/generate_id.h"
+
+            #"src/move/systems/move.cpp"
+            
+           # "src/game_object.h"
+            #"src/move/systems/move.h"
+           
+            #"src/move/components/movement.h"
+            #"src/move/components/movement.cpp"
+           # "src/move/components/vector2.h"
+            #"src/move/components/sprite.h"
+            #"src/entity/square.h"
+            #)
+
+             #"src/move/components/MoveComponent.cpp"
+           # "src/input/Input.cpp"
+           # "src/input/Input.h"
+           # "src/render/ShaderProgram.cpp"
+           # "src/render/ShaderProgram.h"
+           # "src/resource/ResourceManager.cpp"
+           # "src/resource/ResourceManager.h")
+
+#sdl2
+set(SDL2_INCLUDE_DIRS "${CMAKE_CURRENT_LIST_DIR}/lib/SDL2-2.30.0/include")  
+set(SDL2_LIBRARIES "${CMAKE_CURRENT_LIST_DIR}/lib/SDL2-2.30.0/lib/x64/SDL2.lib;${CMAKE_CURRENT_LIST_DIR}/lib/SDL2-2.30.0/lib/x64/SDL2main.lib")
+
+set(SDL2_DIR "${CMAKE_CURRENT_LIST_DIR}/lib/SDL2-2.30.0/cmake")
+set(SDL2_PATH "${CMAKE_CURRENT_LIST_DIR}/lib/SDL2-2.30.0/lib/x64")
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_LIST_DIR}/SDL2-2.30.0/cmake")
+
+
+include_directories(${SDL2_INCLUDE_DIRS})
+
+
+target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES})
+#sdl2
+
+#sdl2_image nad sdl2_ttf
+set(SDL2_IMAGE_INCLUDE_DIRS "${CMAKE_CURRENT_LIST_DIR}/lib/sdl2_image/include")
+set(SDL2_IMAGE_LIBRARIES "${CMAKE_CURRENT_LIST_DIR}/lib/sdl2_image/SDL2_image.lib")
+
+set(SDL2_TTF_INCLUDE_DIRS "${CMAKE_CURRENT_LIST_DIR}/lib/sdl2_ttf/include")
+set(SDL2_TTF_LIBRARIES "${CMAKE_CURRENT_LIST_DIR}/lib/sdl2_ttf/SDL2_ttf.lib")
+
+include_directories(${SDL2_IMAGE_INCLUDE_DIRS} ${SDL2_TTF_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME} ${SDL2_IMAGE_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${SDL2_TTF_LIBRARIES})
+
+
+#sdl2_image
+
+#headers for ENTITY
+#set(MOVE_DIR "${CMAKE_CURRENT_LIST_DIR}/src/move/components ${CMAKE_CURRENT_LIST_DIR}/src/move/systems")
+#include_directories("${MOVE_DIR}")
+#include_directories("${CMAKE_CURRENT_LIST_DIR}/src")
+#headers for ENTITY
+
+#headers for SYSTEMS
+#set(ENTITY_DIR "${CMAKE_CURRENT_LIST_DIR}/src/entity")
+#include_directories(${ENTITY_DIR})
+#headers for SYSTEMS
+
+set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/)
+
+# add dll
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+					COMMAND ${CMAKE_COMMAND} -E copy_directory
+					${CMAKE_CURRENT_LIST_DIR}/dll $<TARGET_FILE_DIR:${PROJECT_NAME}>)
+
+
+#add res
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+                    COMMAND ${CMAKE_COMMAND} -E copy_directory
+					${CMAKE_CURRENT_LIST_DIR}/res $<TARGET_FILE_DIR:${PROJECT_NAME}>/res)
+
+                 
