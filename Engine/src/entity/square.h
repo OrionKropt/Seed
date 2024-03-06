@@ -1,6 +1,6 @@
 #pragma once
 
-#include  "movement.h"
+#include "movement.h"
 #include "color.h"
 #include "game_object.h"
 
@@ -23,7 +23,7 @@ Square::Square() : length(0) {}
 Square::Square(const Square& other)
 {
 	this->length = other.length;
-	//this->vec = other.vec;
+	this->vec = other.vec;
 }
 
 
