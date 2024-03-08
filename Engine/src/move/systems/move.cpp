@@ -1,15 +1,15 @@
 
 #include "move.h"
 
-void System::Move::MoveUpdate(const float& delta_time, Movement& object)
+void System::Move::MoveUpdate(const float& delta_time, CMovement& object)
 {
-	if (object.IsMoving)
+	/*if (object.IsMoving)
 	{
 		if (object.dir == object.RIGHT) 
-			object.vec.x += object.moveSpeed;
-		else object.vec.x -= object.moveSpeed;
+			object.Position += object.moveSpeed;
+		else object.Position -= object.moveSpeed;
 	}
-	if (object.IsJumping && object.OnGround) object.vec.y += object.jampSpeed;
+	if (object.IsJumping && object.OnGround) object.Position += object.jampSpeed;
 	
-	object.dir = object.RIGHT;
+	object.dir = object.RIGHT;*/
 }

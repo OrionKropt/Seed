@@ -1,10 +1,12 @@
+// ccolor.cpp
+// Ñolor is stored in rgb format
 
 
 class Color
 {
 public:
+	
 	Color();
-	Color(const Color& other);
 	char r;
 	char g;
 	char b;

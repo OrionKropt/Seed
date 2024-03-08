@@ -1,14 +1,19 @@
 #pragma once
+#include <memory>
 #include "generate_id.h"
-
-#include<vector>
+#include "cmovement.h"
+#include "cname.h"
+#include "ccolor.h"
 
 class GameObject
 {
 public:
 	GameObject();
 	auto GetID() -> unsigned int const;
-	vector<GameObject*> vec;
+
+	std::shared_ptr<CMovement> cMovement;
+	std::shared_ptr<CName> cName;
+	std::shared_ptr<Color> cColor;
 private:
 	const unsigned int id;
 };

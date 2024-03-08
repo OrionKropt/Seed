@@ -1,27 +1,46 @@
 #include "main.h"
 #include "game_object.h"
 
+#include <SDL.h>
 
 using namespace std;
 
 
 
-
+void Init(SDL_Window*, SDL_Renderer*);
 
 
 
 
 int main(int argc, char* argv[])
 {
-	vector<GameObject> Entity{ Square(), Square()};
+	vector<GameObject> entitys{};
 	
+	GameObject Square;
+	Square.cName = make_shared<CName>("Green square");
+	Square.cMovement = make_shared<CMovement>();
+	Square.cMovement->Velocity = vector2(10, 10);
+	entitys.push_back(Square);
 
-	cout << Entity[0].GetID() << endl;
-	cout << Entity[1].GetID();
 
-	return 0;
+	
+	cout << "entitys[0] id: " << entitys[0].GetID() << endl;
+	cout << "entitys[0] name:" << entitys[0].cName->name << endl;
+	cout << "entitys[0] speed: " << entitys[0].cMovement->Velocity.Length() << endl;
+	
+	vector2 a(2, 2);
+	vector2 b(0, 0);
+	a *= 2;
+	a /= 2;
+	cout << a.Distance(b) << endl;
+	cout << a.x << ' ' << a.y << endl; 
+	return 0;	
 }
 
+void Init(SDL_Window* win, SDL_Renderer* ren)
+{
+
+}
 
 
 

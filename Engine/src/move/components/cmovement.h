@@ -4,18 +4,19 @@
 #include "vector2.h"
 
 
-class Movement
+class CMovement
 {
 public:
-	Movement();
-	float moveSpeed;
-	float jampSpeed;
+	CMovement();
+	vector2 Velocity;
+	vector2 jampVelocity;
+	vector2 Position;
 	bool IsMoving;
 	bool IsJumping;
 	bool OnGround;
 	enum direction { RIGHT = 1, LEFT };
 	direction dir;
-	vector2 vec;
 };
+
 
 
