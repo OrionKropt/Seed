@@ -3,6 +3,10 @@
 file (GLOB_RECURSE _SOURCES CONFIGURE_DEPENDS "src/*.cpp")
 file (GLOB_RECURSE _HEADERS CONFIGURE_DEPENDS "src/*.h")
 
+add_executable(${PROJECT_NAME} ${_SOURCES} ${_HEADERS})
+
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${_SOURCES} ${_HEADERS})
+
 set (_INCLUDE_DIRS "")
 
 foreach (_headerFile ${_HEADERS})
@@ -12,38 +16,9 @@ endforeach()
 
 list (REMOVE_DUPLICATES _INCLUDE_DIRS)
 
-add_executable(${PROJECT_NAME} ${_SOURCES} "${_HEADERS}")
-
 target_include_directories(${PROJECT_NAME} PRIVATE ${_INCLUDE_DIRS})
 
 
-
-#add_executable (${PROJECT_NAME}
-           # "src/main.cpp"
-           # "src/main.h"
-          
-           # "src/generate_id.cpp"
-           # "src/generate_id.h"
-
-            #"src/move/systems/move.cpp"
-            
-           # "src/game_object.h"
-            #"src/move/systems/move.h"
-           
-            #"src/move/components/movement.h"
-            #"src/move/components/movement.cpp"
-           # "src/move/components/vector2.h"
-            #"src/move/components/sprite.h"
-            #"src/entity/square.h"
-            #)
-
-             #"src/move/components/MoveComponent.cpp"
-           # "src/input/Input.cpp"
-           # "src/input/Input.h"
-           # "src/render/ShaderProgram.cpp"
-           # "src/render/ShaderProgram.h"
-           # "src/resource/ResourceManager.cpp"
-           # "src/resource/ResourceManager.h")
 
 #sdl2
 set(SDL2_INCLUDE_DIRS "${CMAKE_CURRENT_LIST_DIR}/lib/SDL2-2.30.0/include")  
@@ -74,16 +49,6 @@ target_link_libraries(${PROJECT_NAME} ${SDL2_TTF_LIBRARIES})
 
 #sdl2_image
 
-#headers for ENTITY
-#set(MOVE_DIR "${CMAKE_CURRENT_LIST_DIR}/src/move/components ${CMAKE_CURRENT_LIST_DIR}/src/move/systems")
-#include_directories("${MOVE_DIR}")
-#include_directories("${CMAKE_CURRENT_LIST_DIR}/src")
-#headers for ENTITY
-
-#headers for SYSTEMS
-#set(ENTITY_DIR "${CMAKE_CURRENT_LIST_DIR}/src/entity")
-#include_directories(${ENTITY_DIR})
-#headers for SYSTEMS
 
 set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/)
 

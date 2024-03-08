@@ -6,7 +6,7 @@ cmake_minimum_required (VERSION 3.8)
 # Включение горячей перезагрузки для компиляторов MSVC, если поддерживается.
 
 
-set(PROJECT_NAME oven)
+set(PROJECT_NAME Seed)
 # Название проекта (.sln для VS)
 project (${PROJECT_NAME})
 

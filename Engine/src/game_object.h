@@ -1,11 +1,14 @@
 #pragma once
 #include "generate_id.h"
 
+#include<vector>
+
 class GameObject
 {
 public:
 	GameObject();
 	auto GetID() -> unsigned int const;
+	vector<GameObject*> vec;
 private:
 	const unsigned int id;
 };
