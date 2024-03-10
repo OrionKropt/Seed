@@ -2,7 +2,7 @@
 
 
 
-Color::Color()
+CColor::CColor()
 {
 	r = 255;
 	g = 0;

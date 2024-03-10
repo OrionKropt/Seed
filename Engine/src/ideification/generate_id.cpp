@@ -2,6 +2,6 @@
 
 auto GenerateID() -> unsigned int
 {
-    static unsigned int count = 0;
+    static unsigned int count = 1;
     return count++;
 }

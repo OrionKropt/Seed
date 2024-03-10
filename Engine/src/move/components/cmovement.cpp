@@ -8,6 +8,5 @@ CMovement::CMovement() :
 	IsMoving(false),
 	IsJumping(false),
 	OnGround(true),
-	dir(RIGHT),
-	Position()
+	dir(RIGHT)
 {}

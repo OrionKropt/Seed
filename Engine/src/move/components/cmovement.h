@@ -10,7 +10,6 @@ public:
 	CMovement();
 	vector2 Velocity;
 	vector2 jampVelocity;
-	vector2 Position;
 	bool IsMoving;
 	bool IsJumping;
 	bool OnGround;

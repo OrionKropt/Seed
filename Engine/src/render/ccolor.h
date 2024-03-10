@@ -2,11 +2,11 @@
 // Ñolor is stored in rgb format
 
 
-class Color
+class CColor
 {
 public:
 	
-	Color();
+	CColor();
 	char r;
 	char g;
 	char b;
