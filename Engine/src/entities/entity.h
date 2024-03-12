@@ -1,15 +1,18 @@
 #pragma once
 #include <memory>
 
-#include "components.h"
+typedef unsigned int Id;
 
 class Entity
 {
 public:
-	Entity(const unsigned int& Id) : id(Id) {}
-
+	Entity(const Id& Id) : id(Id) {}
+	Entity() : id(-1) {}
+	auto GetId() -> Id { return id; }
+	Entity operator= (const Entity& other) { this->id = other.id; return *this; }
 private:
-	const unsigned int id;
+	
+	Id id;
 };
 
 

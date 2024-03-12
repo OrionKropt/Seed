@@ -1,7 +1,7 @@
 #pragma once
 #include <memory>
 #include "generate_id.h"
-#include "components.h"
+
 
 class GameObject
 {

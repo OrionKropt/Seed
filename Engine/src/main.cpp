@@ -3,7 +3,7 @@
 
 #include <SDL.h>
 
-#include"entity_manager.h"
+#include"world.h"
 
 using namespace std;
 
@@ -16,8 +16,14 @@ void Init(SDL_Window*, SDL_Renderer*);
 
 int main(int argc, char* argv[])
 {
-	vector<Entity> entitys{};
-	EntityManager manager;
+	World world;
+	Entity Player = world.CreateEntity();
+	Entity Enemy = world.CreateEntity();
+	cout << Player.GetId() <<  ' ' << world.entites[world.IndexEntites.at(Player.GetId())].GetId() << endl;
+	cout << Enemy.GetId() << ' ' << world.entites[world.IndexEntites.at(Enemy.GetId())].GetId() << endl;
+	world.DestroyEntity(Player);
+	Entity Player1 = world.CreateEntity();
+	cout << Player1.GetId() << ' ' << world.entites[world.IndexEntites.at(Player1.GetId())].GetId() << endl;
 	
 	
 	return 0;	
