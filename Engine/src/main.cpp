@@ -3,8 +3,8 @@
 
 #include <SDL.h>
 
-#include"world.h"
-
+#include "world.h"
+//#include "color.h"
 using namespace std;
 
 
@@ -16,16 +16,32 @@ void Init(SDL_Window*, SDL_Renderer*);
 
 int main(int argc, char* argv[])
 {
-	World world;
-	Entity Player = world.CreateEntity();
-	Entity Enemy = world.CreateEntity();
-	cout << Player.GetId() <<  ' ' << world.entites[world.IndexEntites.at(Player.GetId())].GetId() << endl;
-	cout << Enemy.GetId() << ' ' << world.entites[world.IndexEntites.at(Enemy.GetId())].GetId() << endl;
-	world.DestroyEntity(Player);
-	Entity Player1 = world.CreateEntity();
-	cout << Player1.GetId() << ' ' << world.entites[world.IndexEntites.at(Player1.GetId())].GetId() << endl;
+	// Test Entity manager
+	//World world;
+	//Entity Player = world.create_entity();
+	//Entity Enemy = world.create_entity();
+	//world.update();
+	//cout << Player.get_id() <<  ' ' << world._Entites[world._Index_entites.at(Player.get_id())].get_id() << endl;
+	//cout << Enemy.get_id() << ' ' << world._Entites[world._Index_entites.at(Enemy.get_id())].get_id() << endl;
+	//world.destroy_entity(Player);
+	//world.update();
+	//Entity Player1 = world.create_entity();
+	//world.update();
+	//cout << Player1.get_id() << ' ' << world._Entites[world._Index_entites.at(Player1.get_id())].get_id() << endl;
+	//for (auto i : world._Entites)
+	//	cout << i.get_id() << endl;
 	
+	//World world;
+	//cout << world.get_max_components() << endl;
 	
+	Position a;
+	Color b;
+	Position c;
+	Movement d;
+	cout << a.signature << endl;
+	cout << b.signature << endl;
+	cout << c.signature << endl;
+	cout << d.signature << endl;
 	return 0;	
 }
 

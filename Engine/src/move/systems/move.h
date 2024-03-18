@@ -1,13 +1,7 @@
 #pragma once
-#include <CMovement.h>
+//#include <Movement.h>
 
 namespace System
 {
-	class Move
-	{
-	public:
-		void MoveUpdate(const float& delta_time, CMovement& object);
-	private:
-
-	};
+	
 }

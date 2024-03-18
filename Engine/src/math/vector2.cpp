@@ -11,17 +11,17 @@ vector2::vector2(const vector2& other)
 	this->y = other.y;
 }
 
-auto vector2::Length() -> float const
+auto vector2::length() -> float const
 {
 	return sqrt((x*x) + (y*y));
 }
 
-auto vector2::Distance(vector2& other) -> float const 
+auto vector2::distance(vector2& other) -> float const 
 {
-	return (other - *this).Length();
+	return (other - *this).length();
 }
 
-auto vector2::ScalarProduct(const vector2& other) -> float const
+auto vector2::scalar_product(const vector2& other) -> float const
 {
 	return ((this->x * other.x) + (this->y * other.y));
 }

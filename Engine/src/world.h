@@ -3,7 +3,7 @@
 #include "component_manager.h"
 
 
-class World : public EntityManager
+class World : public EntityManager, public Component_manager
 {
 private:
 

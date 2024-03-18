@@ -2,36 +2,52 @@
 
 
 
-auto EntityManager::CreateEntity() -> Entity
+auto EntityManager::create_entity() -> Entity
 {
-	assert(_LivingEntityCount < _MAX_ENTITIES && "Too many entities in existence.");
+	assert(_living_entity_count < _MAX_ENTITIES && "Too many entities in existence.");
 	Entity entity;
-	if (DestroyedEntity.empty())
+	if (_Vacant_id.empty())
 	{
 		entity = Entity(GenerateID());
-		++_LivingEntityCount;
 	}
 	else
 	{
-		entity = Entity (DestroyedEntity.back());
-		DestroyedEntity.pop();
-		++_LivingEntityCount;
+		entity = Entity (_Vacant_id.back());
+		_Vacant_id.pop();
 	}
-	entites.push_back(entity);
-	IndexEntites.insert_or_assign(entity.GetId(), _LivingEntityCount - 1);
+	_Add_entity.push_back(entity);
 	return entity;
 }
 
-auto EntityManager::DestroyEntity(Entity& entity) -> void
+auto EntityManager::destroy_entity(Entity& entity) -> void
 {
-	std::swap(entites.at(IndexEntites.at(entity.GetId())),
-		entites.at(_LivingEntityCount - 1));
-	IndexEntites.at(entity.GetId()) = IndexEntites.at(entites.at(IndexEntites.at(entity.GetId())).GetId());
-	DestroyedEntity.push(entity.GetId());
-	--_LivingEntityCount;
+	_Destroyed_entity.push_back(entity);
 }
 
-auto EntityManager::GetMaxEntites() -> unsigned int
+auto EntityManager::get_max_entites() -> unsigned int
 {
 	return _MAX_ENTITIES;
+}
+
+auto EntityManager::update() -> void
+{
+	for (auto e : _Destroyed_entity)
+	{
+		std::swap(_Entites.at(_Index_entites.at(e.get_id())),
+			_Entites.at(_living_entity_count - 1));
+		_Index_entites.at(e.get_id()) = _Index_entites.at(_Entites.at(_Index_entites.at(e.get_id())).get_id());
+		_Vacant_id.push(e.get_id());
+		_Entites.pop_back();
+		--_living_entity_count;
+	}
+	if (!_Destroyed_entity.empty()) _Destroyed_entity.clear();
+
+	for (auto e : _Add_entity)
+	{
+		assert(_living_entity_count < _MAX_ENTITIES && "Too many entities in existence.");
+		++_living_entity_count;
+		_Entites.push_back(e);
+		_Index_entites.insert_or_assign(e.get_id(), _living_entity_count - 1);
+	}
+	if (!_Add_entity.empty()) _Add_entity.clear();
 }

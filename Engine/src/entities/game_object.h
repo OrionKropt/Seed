@@ -7,9 +7,9 @@ class GameObject
 {
 public:
 	GameObject();
-	auto GetID() -> unsigned int const;
+	auto get_id() -> unsigned int const;
 	template<typename T>
-	auto AddComponent(T) -> void;
+	auto add_component(T) -> void;
 	
 private:
 	//static std::unique_ptr<Componets> components;
@@ -17,13 +17,13 @@ private:
 };
 
 //GameObject::GameObject() : id(GenerateID()) { components = std::make_unique<Componets>(); }
-auto GameObject::GetID() -> unsigned int const
+auto GameObject::get_id() -> unsigned int const
 {
 	return id;
 }
 
 template<typename T>
-auto GameObject::AddComponent(T Component) -> void
+auto GameObject::add_component(T Component) -> void
 {
 	if constexpr
 }

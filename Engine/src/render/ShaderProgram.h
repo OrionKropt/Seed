@@ -7,7 +7,7 @@ namespace Renderer {
 	class ShaderProgram
 	{
 	public:
-		ShaderProgram(const std::string& vertexShader, const std::string& fragmentShader);
+		ShaderProgram(const std::string& vertex_shader, const std::string& fragment_shader);
 		~ShaderProgram();
 
 	private:
