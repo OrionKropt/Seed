@@ -5,7 +5,7 @@
 class ResourceManager {
 public:
 
-	 ResourceManager(const std::string& executablePath);
+	 ResourceManager(const std::string& executable_path);
 	//~ResourceManager() = delete;
 	//ResourceManager() = delete;
 private:

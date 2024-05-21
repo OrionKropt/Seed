@@ -2,7 +2,7 @@
 
 #include <bitset>
 #include <cassert>
-#include <iostream>
+
 #define MAX_BITS 64 
 
 

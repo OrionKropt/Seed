@@ -2,52 +2,61 @@
 
 
 
-auto EntityManager::create_entity() -> Entity
+auto EntityManager::create_entity() -> Entity 
 {
-	assert(_living_entity_count < _MAX_ENTITIES && "Too many entities in existence.");
+	assert(living_entity_count < MAX_ENTITIES && "Too many entities in existence.");
 	Entity entity;
-	if (_Vacant_id.empty())
+	if (vacant_id.empty())
 	{
 		entity = Entity(GenerateID());
 	}
 	else
 	{
-		entity = Entity (_Vacant_id.back());
-		_Vacant_id.pop();
+		entity = Entity (vacant_id.back());
+		vacant_id.pop();
 	}
-	_Add_entity.push_back(entity);
+	to_add_entity.push_back(entity);
 	return entity;
 }
 
 auto EntityManager::destroy_entity(Entity& entity) -> void
 {
-	_Destroyed_entity.push_back(entity);
+	destroyed_entity.push_back(entity);
 }
 
-auto EntityManager::get_max_entites() -> unsigned int
+auto EntityManager::get_max_living_entites() -> unsigned int const
 {
-	return _MAX_ENTITIES;
+	return MAX_ENTITIES;
 }
+
+
+// The entity value is mapped to a vector index to store entities evenly in memory
+// When an entity is deleted, it is swapped with the last element of the vector and then erased.
 
 auto EntityManager::update() -> void
 {
-	for (auto e : _Destroyed_entity)
+	for (auto e : destroyed_entity)
 	{
-		std::swap(_Entites.at(_Index_entites.at(e.get_id())),
-			_Entites.at(_living_entity_count - 1));
-		_Index_entites.at(e.get_id()) = _Index_entites.at(_Entites.at(_Index_entites.at(e.get_id())).get_id());
-		_Vacant_id.push(e.get_id());
-		_Entites.pop_back();
-		--_living_entity_count;
-	}
-	if (!_Destroyed_entity.empty()) _Destroyed_entity.clear();
+		size_t index = index_living_entites.at(e.get_id());
+		Entity temp = living_entites.at(living_entity_count - 1);
 
-	for (auto e : _Add_entity)
-	{
-		assert(_living_entity_count < _MAX_ENTITIES && "Too many entities in existence.");
-		++_living_entity_count;
-		_Entites.push_back(e);
-		_Index_entites.insert_or_assign(e.get_id(), _living_entity_count - 1);
+		std::swap(living_entites[index], living_entites.at(living_entity_count - 1));
+
+		index_living_entites.at(e.get_id()) = index_living_entites.at(temp.get_id());
+		vacant_id.push(e.get_id());
+		living_entites.pop_back();
+		--living_entity_count;
 	}
-	if (!_Add_entity.empty()) _Add_entity.clear();
+	if (!destroyed_entity.empty()) destroyed_entity.clear();
+
+	for (auto e : to_add_entity)
+	{
+		assert(living_entity_count < MAX_ENTITIES && "Too many entities in existence.");
+
+		++living_entity_count;
+		living_entites.push_back(e);
+		index_living_entites.insert_or_assign(e.get_id(), living_entity_count - 1);
+		signatures.insert_or_assign(e.get_id(), 0);
+	}
+	if (!to_add_entity.empty()) to_add_entity.clear();
 }

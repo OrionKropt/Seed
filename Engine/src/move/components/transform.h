@@ -4,11 +4,11 @@
 #include "vector2.h"
 #include "generate_signature.h"
 
-class Movement
+class Transform
 {
 public:
-	Movement();
-	vector2 Velocity;
+	Transform();
+	vector2 velocity;
 	vector2 jamp_velocity;
 	bool is_moving;
 	bool is_jumping;

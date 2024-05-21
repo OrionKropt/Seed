@@ -1,10 +1,10 @@
 #include "main.h"
-
+#include <memory>
 
 #include <SDL.h>
 
 #include "world.h"
-//#include "color.h"
+
 using namespace std;
 
 
@@ -16,32 +16,28 @@ void Init(SDL_Window*, SDL_Renderer*);
 
 int main(int argc, char* argv[])
 {
-	// Test Entity manager
-	//World world;
-	//Entity Player = world.create_entity();
-	//Entity Enemy = world.create_entity();
-	//world.update();
-	//cout << Player.get_id() <<  ' ' << world._Entites[world._Index_entites.at(Player.get_id())].get_id() << endl;
-	//cout << Enemy.get_id() << ' ' << world._Entites[world._Index_entites.at(Enemy.get_id())].get_id() << endl;
-	//world.destroy_entity(Player);
-	//world.update();
-	//Entity Player1 = world.create_entity();
-	//world.update();
-	//cout << Player1.get_id() << ' ' << world._Entites[world._Index_entites.at(Player1.get_id())].get_id() << endl;
-	//for (auto i : world._Entites)
-	//	cout << i.get_id() << endl;
+
+	World world;
+	Entity e =  world.create_entity();
+	Entity e2 = world.create_entity();
+
+	world.update();
+
+	cout << e.get_id()  << ' ' << e2.get_id() << endl;
+
+	world.destroy_entity(e);
+
+	cout << "Until update\n";
 	
-	//World world;
-	//cout << world.get_max_components() << endl;
-	
-	Position a;
-	Color b;
-	Position c;
-	Movement d;
-	cout << a.signature << endl;
-	cout << b.signature << endl;
-	cout << c.signature << endl;
-	cout << d.signature << endl;
+	cout << e.get_id()  << ' ' << e2.get_id() << endl;
+
+	world.update();
+
+	Entity e3 = world.create_entity();  // will generate id = 1 because e was deleted and his id became free
+
+	cout << "After update\n";
+	//    already deleted from EntityManager           e3.id = 1
+	cout << e.get_id()<< ' ' << e2.get_id() << ' ' << e3.get_id() << endl;
 	return 0;	
 }
 
